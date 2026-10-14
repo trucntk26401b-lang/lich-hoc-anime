@@ -1,1 +1,180 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17172d">
+<title>My Anime Study Planner</title>
+<style>
+:root{--bg:#111326;--panel:#20213c;--panel2:#292747;--ink:#f8f3ff;--muted:#c6c0df;--pink:#ffb6d9;--lilac:#c9b6ff;--blue:#9ddcff;--mint:#a8f0dc}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#37315c 0,#17172d 45%,#101222 100%);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+.wrap{max-width:520px;margin:auto;padding:14px 13px 34px}
+.hero{position:relative;overflow:hidden;border:1px solid #ffffff20;border-radius:25px;padding:23px 19px 20px;background:linear-gradient(135deg,#514274dd,#20294ddd),radial-gradient(circle at 85% 15%,#fbc4e4,transparent 35%);box-shadow:0 14px 35px #0004}
+.hero:after{content:"✦  ✧   ⋆      ✦   ˚";position:absolute;right:15px;top:12px;color:#fff9;font-size:22px;letter-spacing:5px}
+.eyebrow{font-size:11px;letter-spacing:2px;color:#e8ddff}.hero h1{font-size:31px;line-height:1.1;margin:12px 0 8px}.hero p{margin:0;color:#e4dff6;font-size:13px;line-height:1.6;max-width:290px}
+.hero-bottom{display:flex;gap:8px;align-items:center;margin-top:16px;flex-wrap:wrap}.pill{background:#ffffff17;border:1px solid #ffffff24;border-radius:99px;padding:7px 10px;font-size:11px}
+.section{margin-top:21px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 11px}.section h2{font-size:16px;margin:0}.hint{font-size:11px;color:var(--muted)}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.weekday{border:1px solid #ffffff18;background:#ffffff08;color:var(--muted);border-radius:12px;padding:9px 0;text-align:center;font-size:11px;cursor:pointer}.weekday b{display:block;font-size:13px;color:var(--ink);margin-bottom:3px}.weekday.active{background:linear-gradient(150deg,#c8aaff,#ffb8d8);color:#29213e;border-color:transparent}.weekday.active b{color:#29213e}
+.card{border:1px solid #ffffff16;background:linear-gradient(145deg,#292845ed,#1c2038f2);border-radius:19px;padding:15px;margin-top:10px;box-shadow:0 8px 20px #0002}.cardtop{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px}.card h3{font-size:15px;margin:0}.tag{font-size:10px;color:#211d37;background:var(--pink);padding:5px 8px;border-radius:99px;white-space:nowrap}.task{display:grid;grid-template-columns:19px 1fr auto;gap:8px;align-items:start;border-top:1px solid #ffffff12;padding:11px 0 3px;font-size:13px}.task input{accent-color:#d3b9ff;width:16px;height:16px;margin-top:2px}.task .time{font-size:11px;color:var(--blue);font-variant-numeric:tabular-nums;white-space:nowrap}.task label{line-height:1.4}.task.done label{text-decoration:line-through;color:#9693ae}.task.done .time{opacity:.55}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}.btn{border:1px solid #ffffff25;color:var(--ink);background:#ffffff10;border-radius:12px;padding:9px 12px;font-size:12px}.btn.primary{background:linear-gradient(120deg,#d2b9ff,#ffbddd);color:#28203c;font-weight:700;border:0}.actions{display:flex;gap:8px;flex-wrap:wrap}.quote{font-size:13px;color:#f2d8ed;line-height:1.6}
+.music{display:flex;gap:13px;align-items:center}.album{width:78px;height:78px;flex:0 0 78px;border-radius:17px;background:linear-gradient(145deg,#f5c6e4,#a9a9f9 50%,#242747);display:grid;place-items:center;font-size:31px;box-shadow:inset 0 0 20px #fff6}.musicinfo{min-width:0;flex:1}.musicinfo h3{margin:0 0 4px;font-size:14px}.musicinfo p{margin:0;color:var(--muted);font-size:11px;line-height:1.5}.music-controls{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.smallnote{color:var(--muted);font-size:11px;line-height:1.6;margin-top:10px}
+.progressline{height:7px;border-radius:99px;background:#ffffff17;overflow:hidden;margin:12px 0 7px}.progressbar{height:100%;width:0;background:linear-gradient(90deg,#a9e9ff,#d4b5ff,#ffb7d8);transition:width .2s}.progressmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+textarea,input[type=text],input[type=time],select{width:100%;background:#17182e;border:1px solid #ffffff25;color:var(--ink);border-radius:11px;padding:10px;outline:none}label.field{display:block;font-size:11px;color:var(--muted);margin:10px 0 5px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.foot{text-align:center;color:#aaa6c8;font-size:11px;padding:20px 8px 0;line-height:1.7}
+#editPanel{display:none}#editPanel.open{display:block}.empty{color:var(--muted);font-size:12px;padding:10px 0}
+@media(min-width:450px){.wrap{padding-top:24px}.hero{padding:27px}.hero h1{font-size:35px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">✦ MY LITTLE STUDY UNIVERSE ✦</div>
+    <h1>Lịch học của tui</h1>
+    <p>Mỗi ngày một chút tiến bộ.<br>Học để đạt mục tiêu, hiểu để đi xa hơn.</p>
+    <div class="hero-bottom"><span class="pill">🌙 Chế độ buổi tối</span><span class="pill">✨ Mục tiêu A+</span><span class="pill" id="todayLabel">Hôm nay</span></div>
+  </header>
 
+  <section class="section">
+    <div class="section-head"><h2>🗓️ Lịch trong tuần</h2><span class="hint">Chạm ngày để xem</span></div>
+    <div class="week" id="week"></div>
+    <div id="dayContent"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>🌷 Tiến độ hôm nay</h2><span class="hint" id="progressText">0% hoàn thành</span></div>
+    <div class="card">
+      <div class="progressline"><div class="progressbar" id="progressBar"></div></div>
+      <div class="progressmeta"><span id="taskCount">0/0 việc đã xong</span><span>Đi đều hơn, không cần hoàn hảo.</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>🎧 Góc âm nhạc</h2><span class="hint">Nhạc khi học</span></div>
+    <div class="card">
+      <div class="music">
+        <div class="album">🎧🌌</div>
+        <div class="musicinfo">
+          <h3 id="songTitle">Nhạc nhẹ để tập trung</h3>
+          <p>Chọn bài bạn thích. Trình duyệt cần bạn bấm phát và có thể cần mạng.</p>
+          <div class="music-controls">
+            <button class="btn primary" id="musicBtn">▶ Mở nhạc</button>
+            <button class="btn" id="lofiBtn">♪ Nhạc nền miễn phí</button>
+          </div>
+        </div>
+      </div>
+      <p class="smallnote">“Trước khi em tồn tại” và “Tìm em” là các bài có bản quyền, nên ứng dụng không nhúng sẵn bản nhạc. Nút mở nhạc sẽ đưa bạn đến kết quả tìm kiếm trên YouTube. Nhạc nền tạo bằng trình duyệt là âm thanh đơn giản, không phải bản thu gốc.</p>
+      <audio id="audio" loop></audio>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>✍️ Tùy chỉnh lịch</h2><span class="hint">Đổi môn mỗi học kỳ</span></div>
+    <div class="card">
+      <p class="quote">Lịch này là của bạn — đổi môn, giờ học và mục tiêu theo học kỳ mới bất cứ lúc nào.</p>
+      <div class="actions">
+        <button class="btn primary" id="editBtn">＋ Thêm / sửa buổi học</button>
+        <button class="btn" id="resetBtn">Khôi phục lịch mẫu</button>
+      </div>
+      <div id="editPanel">
+        <label class="field" for="editDay">Ngày trong tuần</label>
+        <select id="editDay">
+          <option value="1">Thứ Hai</option><option value="2">Thứ Ba</option><option value="3">Thứ Tư</option><option value="4">Thứ Năm</option><option value="5">Thứ Sáu</option><option value="6">Thứ Bảy</option><option value="0">Chủ Nhật</option>
+        </select>
+        <label class="field" for="subject">Tên môn / mục tiêu</label>
+        <input id="subject" type="text" placeholder="Ví dụ: Xác suất thống kê">
+        <div class="grid2">
+          <div><label class="field" for="startTime">Bắt đầu</label><input id="startTime" type="time" value="20:30"></div>
+          <div><label class="field" for="endTime">Kết thúc</label><input id="endTime" type="time" value="21:15"></div>
+        </div>
+        <label class="field" for="details">Việc cần làm</label>
+        <textarea id="details" rows="2" placeholder="Ví dụ: Ôn công thức, làm 3 bài tập"></textarea>
+        <div class="actions" style="margin-top:10px">
+          <button class="btn primary" id="saveTask">Lưu buổi học</button>
+          <button class="btn" id="cancelEdit">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">🌙 Học vừa sức · nghỉ đúng lúc · quay lại vào ngày mai<br>Dữ liệu lịch được lưu trên trình duyệt của thiết bị này.</div>
+</div>
+
+<script>
+const dayNames={1:"Thứ Hai",2:"Thứ Ba",3:"Thứ Tư",4:"Thứ Năm",5:"Thứ Sáu",6:"Thứ Bảy",0:"Chủ Nhật"};
+const defaults={
+  1:{subject:"Tiếng Anh",tag:"Tối nhẹ",tasks:[["20:30","21:00","Từ vựng hoặc ngữ pháp"],["21:00","21:15","Nhớ lại kiến thức môn đang ôn"]]},
+  2:{subject:"Môn ưu tiên 1",tag:"Học trọng tâm",tasks:[["20:30","21:15","Ôn lý thuyết theo đề cương"],["21:25","22:00","Làm bài tập và ghi lỗi sai"]]},
+  3:{subject:"Tiếng Anh",tag:"Tối nhẹ",tasks:[["20:30","21:00","Từ vựng, đọc hoặc nghe"],["21:00","21:15","Kiểm tra lại bài học"]]},
+  4:{subject:"Môn ưu tiên 2",tag:"Luyện bài",tasks:[["20:30","21:15","Học một dạng kiến thức"],["21:25","22:00","Luyện bài tập theo dạng"]]},
+  5:{subject:"Môn ưu tiên 3",tag:"Củng cố",tasks:[["20:30","21:15","Học khái niệm và ví dụ"],["21:25","22:00","Tự trả lời câu hỏi không nhìn tài liệu"]]},
+  6:{subject:"Ôn tập & luyện đề",tag:"Tập trung",tasks:[["20:30","21:15","Ôn môn còn yếu nhất"],["21:25","22:00","Làm đề hoặc bài tập tổng hợp"]]},
+  0:{subject:"Tổng kết tuần",tag:"Chuẩn bị tuần mới",tasks:[["20:30","21:00","Ôn lại kiến thức quan trọng"],["21:00","21:20","Ghi lỗi sai và lập kế hoạch tuần sau"]]}
+};
+const dayOrder=[1,2,3,4,5,6,0];
+function loadData(){try{const x=localStorage.getItem("animeStudyPlannerV1");return x?JSON.parse(x):structuredClone(defaults)}catch(e){return JSON.parse(JSON.stringify(defaults))}}
+let data=loadData(), selected=new Date().getDay(), audioContext=null, oscillator=null, gainNode=null;
+function save(){localStorage.setItem("animeStudyPlannerV1",JSON.stringify(data))}
+function makeId(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function ensureIds(){for(const d of Object.values(data)){d.tasks=d.tasks.map(t=>Array.isArray(t)?{id:makeId(),start:t[0],end:t[1],text:t[2],done:false}:({...t,id:t.id||makeId()}))}}
+ensureIds();save();
+function renderWeek(){
+ const el=document.getElementById("week");el.innerHTML="";
+ dayOrder.forEach(d=>{const b=document.createElement("button");b.className="weekday"+(d===selected?" active":"");b.innerHTML=`<b>${["CN","T2","T3","T4","T5","T6","T7"][d]}</b>${d===new Date().getDay()?"• hôm nay":""}`;b.onclick=()=>{selected=d;renderWeek();renderDay()};el.appendChild(b)})
+}
+function renderDay(){
+ const d=data[selected]||{subject:"Chưa có môn",tag:"Tùy chỉnh",tasks:[]};
+ const el=document.getElementById("dayContent");el.innerHTML="";
+ const card=document.createElement("div");card.className="card";
+ const top=document.createElement("div");top.className="cardtop";
+ const h=document.createElement("h3");h.textContent=dayNames[selected]+" · "+d.subject;
+ const tag=document.createElement("span");tag.className="tag";tag.textContent=d.tag||"Buổi học";
+ top.append(h,tag);card.append(top);
+ if(!d.tasks.length){const p=document.createElement("p");p.className="empty";p.textContent="Chưa có buổi học. Nhấn “Thêm / sửa buổi học” để tạo lịch riêng.";card.append(p)}
+ d.tasks.forEach(t=>{
+  const row=document.createElement("div");row.className="task"+(t.done?" done":"");
+  const check=document.createElement("input");check.type="checkbox";check.checked=!!t.done;check.setAttribute("aria-label","Đánh dấu hoàn thành");
+  check.onchange=()=>{t.done=check.checked;save();renderDay();renderProgress()};
+  const label=document.createElement("label");label.textContent=t.text;label.onclick=()=>{check.checked=!check.checked;check.onchange()};
+  const time=document.createElement("span");time.className="time";time.textContent=t.start+"–"+t.end;
+  row.append(check,label,time);card.append(row);
+ });
+ const acts=document.createElement("div");acts.className="actions";acts.style.marginTop="13px";
+ const add=document.createElement("button");add.className="btn";add.textContent="＋ Thêm việc";add.onclick=()=>{document.getElementById("editPanel").classList.add("open");document.getElementById("editDay").value=String(selected);document.getElementById("subject").value=d.subject==="Chưa có môn"?"":d.subject;document.getElementById("subject").focus()};
+ const del=document.createElement("button");del.className="btn";del.textContent="Xóa lịch ngày này";del.onclick=()=>{if(confirm("Xóa các việc trong "+dayNames[selected]+"?")){data[selected]={subject:"Chưa có môn",tag:"Tùy chỉnh",tasks:[]};save();renderDay();renderProgress()}};
+ acts.append(add,del);card.append(acts);el.append(card);
+}
+function renderProgress(){
+ const d=data[new Date().getDay()]||{tasks:[]};const total=d.tasks.length,done=d.tasks.filter(t=>t.done).length,pct=total?Math.round(done/total*100):0;
+ document.getElementById("progressText").textContent=pct+"% hoàn thành";
+ document.getElementById("progressBar").style.width=pct+"%";
+ document.getElementById("taskCount").textContent=`${done}/${total} việc đã xong hôm nay`;
+}
+const now=new Date();document.getElementById("todayLabel").textContent=now.toLocaleDateString("vi-VN",{day:"numeric",month:"long"});
+renderWeek();renderDay();renderProgress();
+document.getElementById("editBtn").onclick=()=>document.getElementById("editPanel").classList.toggle("open");
+document.getElementById("cancelEdit").onclick=()=>document.getElementById("editPanel").classList.remove("open");
+document.getElementById("saveTask").onclick=()=>{
+ const day=Number(document.getElementById("editDay").value),subject=document.getElementById("subject").value.trim(),start=document.getElementById("startTime").value,end=document.getElementById("endTime").value,details=document.getElementById("details").value.trim();
+ if(!subject||!details||!start||!end){alert("Bạn nhập tên môn, giờ học và việc cần làm nhé.");return}
+ if(end<=start){alert("Giờ kết thúc cần sau giờ bắt đầu.");return}
+ if(!data[day])data[day]={subject,tag:"Buổi học",tasks:[]};
+ data[day].subject=subject;data[day].tag="Buổi học";
+ data[day].tasks.push({id:makeId(),start,end,text:details,done:false});
+ selected=day;save();renderWeek();renderDay();renderProgress();document.getElementById("editPanel").classList.remove("open");
+ document.getElementById("details").value="";
+};
+document.getElementById("resetBtn").onclick=()=>{if(confirm("Khôi phục lịch mẫu? Các thay đổi hiện tại sẽ bị xóa.")){data=JSON.parse(JSON.stringify(defaults));ensureIds();save();renderWeek();renderDay();renderProgress()}};
+document.getElementById("musicBtn").onclick=()=>{const q=encodeURIComponent("Trước khi em tồn tại Tìm em nhạc");window.open("https://www.youtube.com/results?search_query="+q,"_blank","noopener");};
+let lofiOn=false;
+document.getElementById("lofiBtn").onclick=async()=>{
+ if(lofiOn){if(audioContext)await audioContext.close();audioContext=null;lofiOn=false;document.getElementById("lofiBtn").textContent="♪ Nhạc nền miễn phí";return}
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC){alert("Trình duyệt này chưa hỗ trợ nhạc nền.");return}
+  audioContext=new AC();gainNode=audioContext.createGain();gainNode.gain.value=0.035;gainNode.connect(audioContext.destination);
+  const notes=[261.63,329.63,392.00,329.63,293.66,349.23,440,349.23];let i=0;
+  function playNote(){if(!lofiOn)return;const o=audioContext.createOscillator(),g=audioContext.createGain();o.type="sine";o.frequency.value=notes[i%notes.length];g.gain.setValueAtTime(0.0001,audioContext.currentTime);g.gain.exponentialRampToValueAtTime(0.16,audioContext.currentTime+0.08);g.gain.exponentialRampToValueAtTime(0.0001,audioContext.currentTime+1.0);o.connect(g);g.connect(gainNode);o.start();o.stop(audioContext.currentTime+1.05);i++;setTimeout(playNote,850)}
+  lofiOn=true;await audioContext.resume();playNote();document.getElementById("lofiBtn").textContent="Ⅱ Tắt nhạc nền";
+ }catch(e){alert("Không thể phát âm thanh trong trình duyệt này.")}
+};
+</script>
+</body>
+</html>
